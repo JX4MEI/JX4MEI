@@ -1,0 +1,107 @@
+model:
+  arch: xmeiqwen
+  model_type: pretrain_vicuna
+
+  frozen_video_proj: False
+  frozen_video_Qformer: False
+  frozen_audio_Qformer: False
+  frozen_audio_proj: False
+  frozen_llm: False 
+
+  lora_r: 64
+
+  video_fusion_type: qformer 
+  audio_fusion_type: qformer 
+
+  ckpt: "/path/to/affectgpt_checkpoint.pth" 
+
+  # Encoders
+  llama_model: "Qwen25"            
+  acoustic_encoder: "HUBERT_LARGE" 
+  visual_encoder: "CLIP_VIT_LARGE" 
+
+  num_audio_query_token: 32
+  num_video_query_token: 32
+  num_image_query_token: 32 
+
+  max_length: 1024
+
+  vis_processor:
+    train:
+      name: "alpro_video_train"
+      n_frms: 8
+      image_size: 224
+  text_processor:
+    train:
+      name: "blip_caption"
+  img_processor:
+    train:
+      name: "blip2_image_train"
+      image_size: 224
+  
+
+datasets:
+  xmeidataset:
+    data_type: video
+    face_or_frame: 'multiframe' 
+    label_type: 'hybird'
+
+run:
+
+  task: image_text_pretrain
+
+  # optimizer
+  lr_sched: "linear_warmup_cosine_lr"
+  init_lr: 1e-5 
+  min_lr: 1e-5
+  warmup_lr: 1e-6
+  weight_decay: 0.05
+
+  max_epoch: 60 
+  iters_per_epoch: 5000 
+  warmup_steps: 5000   
+  batch_size_train: 16
+  batch_size_eval:  16
+
+  seed: 42
+  num_workers: 4
+
+  amp: True 
+  resume_ckpt_path: null 
+
+  evaluate: False 
+  train_splits: ["train"]
+
+  device: "cuda" 
+  world_size: 1
+  dist_url: "env://"
+  distributed: True
+
+
+inference:
+
+  task: image_text_pretrain
+
+  vis_processor:
+    train:
+      name: "alpro_video_eval"
+      n_frms: 8
+      image_size: 224
+  text_processor:
+    train:
+      name: "blip_caption"
+  img_processor:
+    train:
+      name: "blip2_image_eval"
+      image_size: 224
+
+  face_or_frame: ''
+
+  base_root: 'output/results'
+  
+  ckpt_root: 
+  ckpt_name: 
+  test_epoch: 
+  test_epochs: 
+  skip_epoch: 
+  gpu:
