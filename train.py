@@ -36,10 +36,7 @@ def parse_args():
     return args
 
 def get_runner_class(cfg):
-    """
-    Get runner class from config. Default to epoch-based runner.
-    """
-    runner_cls = registry.get_runner_class(cfg.run_cfg.get("runner", "runner_base")) # 'affectgpt.runners.runner_base.RunnerBase'
+    runner_cls = registry.get_runner_class(cfg.run_cfg.get("runner", "runner_base"))
     return runner_cls
 
 def main():
