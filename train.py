@@ -47,7 +47,7 @@ def main():
 
     os.environ["TORCH_NCCL_BLOCKING_WAIT"] = "1"
     job_name = os.path.basename(args.cfg_path)[:-len('.yaml')]
-    job_id = f"{job_name}_{datetime.now().strftime('%Y%m%d%H%M')[:-1]}" # zhuofan
+    job_id = f"{job_name}_{datetime.now().strftime('%Y%m%d%H%M')[:-1]}"
 
     print (job_id)
 
