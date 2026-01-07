@@ -8,17 +8,17 @@ import torch
 from datetime import datetime
 import torch.backends.cudnn as cudnn
 
-import my_affectgpt.tasks as tasks
-from my_affectgpt.common.config import Config
-from my_affectgpt.common.dist_utils import get_rank, init_distributed_mode
-from my_affectgpt.common.logger import setup_logger
-from my_affectgpt.common.registry import registry
-from my_affectgpt.common.optims import LinearWarmupCosineLRScheduler, LinearWarmupStepLRScheduler
-from my_affectgpt.tasks import *
-from my_affectgpt.models import *
-from my_affectgpt.runners import *
-from my_affectgpt.processors import *
-from my_affectgpt.datasets.builders import *
+import xmeiqwen.tasks as tasks
+from xmeiqwen.common.config import Config
+from xmeiqwen.common.dist_utils import get_rank, init_distributed_mode
+from xmeiqwen.common.logger import setup_logger
+from xmeiqwen.common.registry import registry
+from xmeiqwen.common.optims import LinearWarmupCosineLRScheduler, LinearWarmupStepLRScheduler
+from xmeiqwen.tasks import *
+from xmeiqwen.models import *
+from xmeiqwen.runners import *
+from xmeiqwen.processors import *
+from xmeiqwen.datasets.builders import *
 
 def setup_seeds(config): 
     seed = config.run_cfg.seed + get_rank()
