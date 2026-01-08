@@ -28,19 +28,6 @@ We construct **XMEI-dataset** via a rigorous pipeline involving CoT generation a
     <a href="#"><img src="docs/images/dataset_construction.png" width="80%"></a> <br> 
 </p>
 
-### Dataset Structure
-
-
-```bash
-dataset
-├── XMEI-dataset
-│   ├── videos            
-│   ├── audios            
-│   ├── annotations       
-│   │   ├── train.json    
-│   │   ├── val.json      
-│   │   └── test.json    
-```
 
 ### Annotation Format
 Each entry in `train.json` contains rich annotations, including modality-specific objective descriptions and hierarchical causal reasoning:
